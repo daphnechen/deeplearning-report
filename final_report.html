@@ -58,8 +58,8 @@ color: #FF9900;
 <p>If our project is successful, we will be able to explain the impacts of different network architectures on applied tasks such as self-monitoring navigation. The GRU and convolutional layers, when compared to LSTM cells, will be expected to impact not only performance but also training and testing time. Our results will show how these alternative architectures can be leveraged to improve and extend the prior work. </p>
 <br>
 
-<h3>Related Work</h3>
-<p>The original paper designs and implements an agent that can learn to navigate in photo-realistic environments given image data (RGB-D photos of rooms).</p>
+<h3>Prior Work</h3>
+<p>The original paper designs and implements an agent that can learn to navigate in photo-realistic environments given image data (RGB-D photos of rooms). It is comprised of textual grounding, action selection, progress monitoring, and visual grounding. The visual grounding unit uses ResNet-152 to extract image features, which limits our ability to change that component's architecture. We decided to treat this as a black box and instead focus on improving performance in the action selection and textual grounding units.</p>
 <p>The follow up work from the same authors of the original paper further examines the use of the original model's progress monitor module as a heuristic for evaluating actions when an agent is searching for the best possible next action.</p>
 <br>
 
@@ -151,9 +151,8 @@ Most other problems we experienced were related to the complexity of the code ba
 <br>
 
 <h2>Future Work</h2>
-<p>
-We would like to guide our progress towards introducing POS (parts of speech) tagging and pre-trained vocabulary or text embeddings in order to see the effect on model performance. This would involve incorporating attended features for POS tags, where there is an assigned probability distribution for different tags. Furthermore, an interesting direction could involve experimenting with additional LSTM layers in the progress monitor and language embedding modules. We would also like to see the effect of implementing a different attentional mechanism, such as a multi-attentional neural network, for textual grounding to improve instruction tracking throughout time.
-</p>
+<p>We would like to guide our progress towards introducing POS (parts of speech) tagging and pre-trained vocabulary or text embeddings in order to see the effect on model performance. This would involve incorporating attended features for POS tags, where there is an assigned probability distribution for different tags. Furthermore, an interesting direction could involve experimenting with additional LSTM layers in the progress monitor and language embedding modules. We would also like to see the effect of implementing a different attentional mechanism, such as a multi-attentional neural network, for textual grounding to improve instruction tracking throughout time.</p>
+<p>Lastly, since we did not make any modifications to the visual grounding unit, future work could include more robust testing such as using different precomputed image features from other image/scene classification datasets such as STL-10 and COIL100. Using different image features may help reduce training times due to ResNet's extensive training cost.</p>
 <br>
 
 <h2>Team Members</h2>
