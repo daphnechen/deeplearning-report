@@ -36,7 +36,7 @@ color: #FF9900;
 <hr>
 
 <h2>Abstract</h2>
-<p>Our group replicated and extended the results of the paper: <i>Self-Monitoring Navigation Agent via Auxiliary Progress Estimation</i> (<a href="https://arxiv.org/pdf/1901.03035.pdf">arxiv</a>).
+<p>Our group replicated and extended the results of the paper: <i>Self-Monitoring Navigation Agent via Auxiliary Progress Estimation</i> (<a href="https://arxiv.org/pdf/1901.03035.pdf">arXiv</a>).
 <p>Enabling an autonomous agent to navigate in unknown environments is a known challenge, and many studies have been done on navigation via visual data. This study addresses the problem of an agent dealing with tasks that lack an explicit representation of the goal – for example, determining what an agent should do when it lacks an intermediate action that is a necessary prior for an ongoing task.</p>
 <p>The current approach outlined in the paper involves a self-monitoring agent that consists of three modules: visual-textual grounding, progress monitoring, and action selection.</p>
 <p>Our work validated the results of the original paper and evaluated two alternative network architectures which were able to reduce training time and augment the original model's textual grounding functionality.</p>
@@ -151,6 +151,7 @@ Most other problems we experienced were related to the complexity of the code ba
 <p>In addition, since we did not make any modifications to the visual grounding unit, future work could include more robust testing such as using different precomputed image features from other image/scene classification datasets such as STL-10 and COIL100. Using different image features may help reduce training times due to ResNet's extensive training cost.</p>
 <p>Lastly, since the three of us are all roboticists in practice, we would love to see this work deployed on a real mobile robot. It would be interesting to see whether the added stochasticity in the real world will significantly affect performance. Robots themselves are often unpredictable and difficult to work with, so testing on one would further reinforce the robustness of this study.</p>
 <br>
+
 <h2>Team Member Task Breakdown</h2>
 <table class="table" style="width:100%">
   <thead>
@@ -174,7 +175,13 @@ Most other problems we experienced were related to the complexity of the code ba
     </tr>
   </tbody>
 </table>
-<br><br>
+<br>
+
+<h2>Code</h2>
+<p>Our GitHub repository can be found <a href="https://github.com/charlesramey/selfmonitoring-agent/">here.</a></p>
+<p>A direct link to the branch containing GRU code and its README can be found <a href="TODO ADD LINK">here.</a></p>
+<p>A direct link to the branch containing 2-layer Conv1d code and its README can be found <a href="TODO ADD LINK">here.</a></p>
+<br>
 
 <h2>Citations</h2>
 <p>[1] C. Ma et al. Self-Monitoring Navigation Agent via Auxiliary Progress Estimation, International Conference on Learning Representations, 2019.</p>
