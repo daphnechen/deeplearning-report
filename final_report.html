@@ -7,7 +7,6 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-<!-- Le styles -->  
   <link href="css/bootstrap.css" rel="stylesheet">
 <style>
 body {
@@ -32,7 +31,7 @@ color: #FF9900;
 <h1>Self-Monitoring Navigation Agent via Auxiliary Progress Estimation</h1> 
 <h2>An Extension with Network Architecture Experiments</h2>
 <span style="font-size: 20px; line-height: 1.5em;"><strong>Osvaldo Armas, Daphne Chen, Charles Ramey</strong></span><br>
-<span style="font-size: 18px; line-height: 1.5em;">Spring 2019 CS 4803 / 7643 Deep Learning: Class Project Progress Check In</span><br>
+<span style="font-size: 18px; line-height: 1.5em;">Spring 2019 CS 4803 / 7643 Deep Learning: Final Report</span><br>
 <span style="font-size: 18px; line-height: 1.5em;">Georgia Tech</span>
 <hr>
 
@@ -43,8 +42,6 @@ color: #FF9900;
 <p>The current approach outlined in the paper involves a self-monitoring agent that consists of three modules: visual-textual grounding, progress monitoring, and action selection.</p>
 <p>Our work validated the results of the original paper and evaluated two alternative network architectures which were able to reduce training time and augment the original model's textual grounding functionality.</p>
 <br>
-
-<!-- figure -->
 
 <div style="text-align: center;">
 <img style="height: 200px;" alt="Default" src="img/matterport.png">
@@ -58,9 +55,13 @@ color: #FF9900;
 <p>If our project is successful, we will be able to explain the impacts of different network architectures on applied tasks such as self-monitoring navigation. The GRU and convolutional layers, when compared to LSTM cells, will be expected to impact not only performance but also training and testing time. Our results will show how these alternative architectures can be leveraged to improve and extend the prior work. </p>
 <br>
 
-<h3>Prior Work</h3>
+<h2>Prior Work</h2>
 <p>The original paper designs and implements an agent that can learn to navigate in photo-realistic environments given image data (RGB-D photos of rooms). It is comprised of textual grounding, action selection, progress monitoring, and visual grounding. The visual grounding unit uses ResNet-152 to extract image features, which limits our ability to change that component's architecture. We decided to treat this as a black box and instead focus on improving performance in the action selection and textual grounding units.</p>
 <p>The follow up work from the same authors of the original paper further examines the use of the original model's progress monitor module as a heuristic for evaluating actions when an agent is searching for the best possible next action.</p>
+<br>
+
+<h2>Applications</h2>
+<p><a href="http://ml.gatech.edu/hg/item/620601">The prior work</a> has been highlighted for its ability to better enable autonomous agents to navigate in unknown environments. Deployed on a real robot, this study could be used to replace humans in dangerous, uncertain situations such as rescuing people from burning buildings or driving autonomously. This demonstrates the potential to affect anyone who could benefit from using an autonomous agent in their daily lives in order to augment regular tasks.</p>
 <br>
 
 <!-- Approach -->
@@ -97,7 +98,7 @@ Most other problems we experienced were related to the complexity of the code ba
 <img style="height: 200px;" alt="Conv" src="img/conv.png">
 </div><div style="text-align: center;">Figure 2: top left – default, top right – GRU, bottom – 2-convolutional-layer</div><br>
 
-<p>We first established a baseline by training and testing the model provided with the prior work using the hyperparameters that achieved the highest performance quoted in the paper. Each of the models were implemented using PyTorch and trained on the same machine with (TODO add machine specs, GPU details). We incrementally monitored the training process with Tensorboard.</p>
+<p>We first established a baseline by training and testing the model provided with the prior work using the hyperparameters that achieved the highest performance quoted in the paper. Each of the models were implemented using PyTorch and trained on the same machine with (TODO add machine specs, GPU details). We incrementally monitored the training process with Tensorboard. We achieved the same results from the baseline model in the paper.</p>
 <p>The following modifications were made to the prior work's model: (1) GRU cells were implemented in place of LSTM cells [2], and (2) two convolutional layers were added in front of the LSTM network with the intent of learning n-grams (bi-grams and tri-grams, respectively for each layer). The architectural changes are pictured above in Figure 2.</p>
 <p>Each modified architecture was trained and tested using the same hyperparameters that achieved the highest performance quoted in the paper to enable fair comparisons between the models. Our results are shown in the following section.</p>
 <br>
@@ -152,7 +153,8 @@ Most other problems we experienced were related to the complexity of the code ba
 
 <h2>Future Work</h2>
 <p>We would like to guide our progress towards introducing POS (parts of speech) tagging and pre-trained vocabulary or text embeddings in order to see the effect on model performance. This would involve incorporating attended features for POS tags, where there is an assigned probability distribution for different tags. Furthermore, an interesting direction could involve experimenting with additional LSTM layers in the progress monitor and language embedding modules. We would also like to see the effect of implementing a different attentional mechanism, such as a multi-attentional neural network, for textual grounding to improve instruction tracking throughout time.</p>
-<p>Lastly, since we did not make any modifications to the visual grounding unit, future work could include more robust testing such as using different precomputed image features from other image/scene classification datasets such as STL-10 and COIL100. Using different image features may help reduce training times due to ResNet's extensive training cost.</p>
+<p>In addition, since we did not make any modifications to the visual grounding unit, future work could include more robust testing such as using different precomputed image features from other image/scene classification datasets such as STL-10 and COIL100. Using different image features may help reduce training times due to ResNet's extensive training cost.</p>
+<p>Lastly, since the three of us are all roboticists in practice, we would love to see this work deployed on a real mobile robot. It would be interesting to see whether the added stochasticity in the real world will significantly affect performance. Robots themselves are often unpredictable and difficult to work with, so testing on one would further reinforce the robustness of this study.</p>
 <br>
 
 <h2>Team Members</h2>
