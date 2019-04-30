@@ -50,15 +50,15 @@ color: #FF9900;
 <br>
 
 <h2>Introduction</h2>
-<p>Our project aimed to validate the results from "Self-Monitoring Navigation Agent via Auxiliary Progress Estimation" and improve these results by studying the performance differences of two additional network architectures. The existing model that we are studying incorporates three modules which perform visual grounding, textual grounding, and progress monitoring to guide an agent through an environment based off of a given instruction. The visual grounding unit uses ResNet-152 to extract image features, which limits our ability to change that component's architecture.[1] We decided to treat this as a black box and instead focus on improving performance in the action selection and textual grounding units.</p>
-<p>We began by setting up our development environments and validating the results from the prior work paper. Once we achieved the baseline performance, we considered ways in which we could either improve the model efficiency or boost validation accuracy (model success rate). Given these motivations, we decided upon using a gated recurrent unit (GRU) in place of an Long Short Term Memory (LSTM) because a GRU has no explicit memory and is thus more efficient. [5] Convolutional layers have formerly been used for sentence classification in order to learn relationships among words, similar to n-grams; thus potentially boosting performance. We expected that each of these modifications would yield different performance than the default LSTM. [4]</p>
+<p>Our project aimed to validate the results from "Self-Monitoring Navigation Agent via Auxiliary Progress Estimation" and improve these results by studying the performance differences of two additional network architectures. The existing model that we are studying incorporates three modules which perform visual grounding, textual grounding, and progress monitoring to guide an agent through an environment based off of a given instruction. The visual grounding unit uses ResNet-152 to extract image features, which limits our ability to change that component's architecture [1]. We decided to treat this as a black box and instead focus on improving performance in the action selection and textual grounding units.</p>
+<p>We began by setting up our development environments and validating the results from the prior work paper. Once we achieved the baseline performance, we considered ways in which we could either improve the model efficiency or boost validation accuracy (model success rate). Given these motivations, we decided upon using a gated recurrent unit (GRU) in place of an Long Short Term Memory (LSTM) because a GRU has no explicit memory and is thus more efficient [2]. Convolutional layers have formerly been used for sentence classification in order to learn relationships among words, similar to n-grams; thus potentially boosting performance. We expected that each of these modifications would yield different performance than the default LSTM [3].</p>
 <p>The prior work utilized LSTM cells in the attention model for instruction parsing as well as in the visual and textual feature co-grounding model. This project sought to examine the performance tradeoffs and advantages of instead using GRU cells and convolutional layers in place of the LSTM cells.</p>
 <p>If our project is successful, we will be able to explain the impacts of different network architectures on applied tasks such as self-monitoring navigation. The GRU and convolutional layers, when compared to LSTM cells, will be expected to impact not only performance but also training time. Our results will show how these alternative architectures can be leveraged to improve and extend the prior work. </p>
 <br>
 
 <h2>Prior Work</h2>
 <p>The original paper designs and implements an agent that can learn to navigate in photo-realistic environments given image data (RGB-D photos of rooms). It is comprised of textual grounding, action selection, progress monitoring, and visual grounding modules.</p>
-<p>The follow up work from the same authors of the original paper further examines the use of the model's progress monitor module as a heuristic for evaluating actions when an agent is searching for the best possible next action.</p>
+<p>The follow up work from the same authors of the original paper further examines the use of the model's progress monitor module as a heuristic for evaluating actions when an agent is searching for the best possible next action [4].</p>
 <br>
 
 <h2>Applications</h2>
@@ -184,7 +184,6 @@ Most other problems we experienced were related to the complexity of the code ba
 <p>[3] Y. Kim. Convolutional Neural Networks for Sentence Classification. Available: https://arxiv.org/abs/1408.5882 </p>
 <p>[4] C. Ma et al. The Regretful Agent: Heuristic-Aided Navigation through Progress Estimation, IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2019.</p>
 <p>[5] J. Chung. Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling, NIPS Deep Learning and Representation Learning Workshop, 2014.</p>
-
 
 
 <br><br>
