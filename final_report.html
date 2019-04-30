@@ -101,6 +101,7 @@ Most other problems we experienced were related to the complexity of the code ba
 <p>We first established a baseline by training and testing the model provided with the prior work using the hyperparameters that achieved the highest performance quoted in the paper. Each of the models were implemented using PyTorch and trained on the same machine with (TODO add machine specs, GPU details). We incrementally monitored the training process with Tensorboard. We achieved the same results from the baseline model in the paper.</p>
 <p>The following modifications were made to the prior work's model: (1) GRU cells were implemented in place of LSTM cells [2], and (2) two convolutional layers were added in front of the LSTM network with the intent of learning n-grams (bi-grams and tri-grams, respectively for each layer). The architectural changes are pictured above in Figure 2.</p>
 <p>Each modified architecture was trained and tested using the same hyperparameters that achieved the highest performance quoted in the paper to enable fair comparisons between the models. Our results are shown in the following section.</p>
+<p></p>
 <br>
 
 <h2>Results</h2>
@@ -113,7 +114,7 @@ Most other problems we experienced were related to the complexity of the code ba
 <img style="height: 200px;" alt="" src="img/success-rate.png">
 <img style="height: 200px;" alt="" src="img/nav-error.png">
 </div>
-<div style="text-align: center;"><b>Figure 3</b></div>
+<div style="text-align: center;"><b>Figure 3: </b>Plots of relevant metrics from training each of the three models.</div>
 
 <div style="display: flex; justify-content: center;">
 <img style="height: 50px;" align="middle" alt="" src="img/legend.png">
@@ -139,7 +140,7 @@ Most other problems we experienced were related to the complexity of the code ba
 <img style="height: 300px;" alt="" src="img/accuracy_instruction_gru.png">
 <img style="height: 300px;" alt="" src="img/accuracy_instruction_conv.png">
 </div>
-<div style="text-align: center;"><b>Figure 6: </b></div>
+<div style="text-align: center;"><b>Figure 6: </b>Instruction length vs. accuracy for each of the three model architectures.</div>
 <br>
 
 <h2>Analysis</h2>
