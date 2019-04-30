@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en"><head>  
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>Deep Learning Final Project | Georgia Tech | Spring 2019: CS 4803/7643</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+<!-- Le styles -->  
+  <link href="css/bootstrap.css" rel="stylesheet">
+<style>
+body {
+padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+.vis {
+color: #3366CC;
+}
+.data {
+color: #FF9900;
+}
+</style>
+  
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+<div class="page-header">
+
+<!-- Title and Name --> 
+<h1>Self-Monitoring Navigation Agent via Auxiliary Progress Estimation</h1> 
+<h2>An Extension with Network Architecture Experiments</h2>
+<span style="font-size: 20px; line-height: 1.5em;"><strong>Osvaldo Armas, Daphne Chen, Charles Ramey</strong></span><br>
+<span style="font-size: 18px; line-height: 1.5em;">Spring 2019 CS 4803 / 7643 Deep Learning: Class Project Progress Check In</span><br>
+<span style="font-size: 18px; line-height: 1.5em;">Georgia Tech</span>
+<hr>
+
+<!-- Goal: TODO uncomment this -->
+<h2>Abstract</h2>
+<p>Our group replicated and extended the results of the study in the paper: <i>Self-Monitoring Navigation Agent via Auxiliary Progress Estimation</i> (<a href="https://arxiv.org/pdf/1901.03035.pdf">arxiv</a>).
+<p>Enabling an autonomous agent to navigate in unknown environments is a known challenge, and many studies have been done on navigation via visual data. This study addresses the problem of an agent dealing with tasks that lack an explicit representation of the goal – for example, determining what an agent should do when it lacks an intermediate action that is a necessary prior for an ongoing task.</p>
+<p>The current approach outlined in the paper involves a self-monitoring agent that consists of three modules: visual-textual grounding, progress monitoring, and action selection. Our project will aim to complete two main goals: replicate the original study performance using PyTorch, and improve upon the study performance by experimenting with alternative network architectures.
+It is challenging to enable an autonomous agent to navigate through uncertainty.
+<br>
+<br>
+***Stuff from poster***
+<br>
+The field of deep learning is advancing rapidly; we want to contribute towards prior work by improving baseline accuracy.</p>
+
+<!-- figure -->
+
+<div style="text-align: center;">
+<img style="height: 200px;" alt="Default" src="img/matterport.png">
+</div> <div style="text-align: center;"><b>Figure 1:</b>Example visualized scenes from the dataset</div>
+
+<br>
+
+<h2>Introduction</h2>
+<p>Our project aims to validate the results from the existing literature and improve these results by studying the performance differences of different network architectures. Once we achieved the baseline performance, we considered ways in which we could either improve the model efficiency or boost validation accuracy (model success rate). Given these motivations, we decided upon using a gated recurrent unit (GRU) in place of an LSTM because a GRU has no explicit memory and is thus more efficient. Convolutional layers (TODO add information). We expect that each of these modifications will yield different performance than the default LSTM.</p>
+<p>The prior work utilizes Long Short Term Memory cells in the attention model for instruction parsing as well as in the visual and textual feature co-grounding model. This project seeks to examine the performance tradeoffs and advantages of instead using GRU cells and convolutional layers in place of the LSTM cells.</p>
+<p>If our project is successful, we will be able to explain the impacts of different network architectures on applied tasks such as self-monitoring navigation. The GRU and convolutional layers, when compared to LSTM cells, will be expected to impact not only performance but also training and testing time. Our results will show how these alternative architectures can be leveraged to improve and extend the prior work. </p>
+<br>
+
+<h3>Prior Work</h3>
+The original paper designs and implements an agent that can learn to navigate in photo-realistic environments given image data (RGB-D photos of rooms). It is comprised of textual grounding, action selection, progress monitoring, and visual grounding. The visual grounding unit uses ResNet-152 to extract image features, which limits our ability to change that component's architecture. We decided to treat this as a black box and instead focus on improving performance in the action selection and textual grounding units.
+<br><br>
+
+<!-- Approach -->
+<h2>Approach</h2>
+<!--<h4>What did you do exactly? How did you solve the problem? Why did you think it would be successful? Is anything new in your approach?</h4> -->
+<p>The baseline model represents the state of the art for self-progress monitoring navigation systems.
+These experiments are adaptations and extensions of the baseline to improve overall performance accuracy and speed up the training process.
+The convolutional layers added in front of the LSTM network in the language embedding module assist in learning bigrams or trigrams based on the kernel size. This extension should improve the system’s contextual understanding of instruction words.
+With fewer gates and no memory unit, the GRU cells which replaced the LSTM cells in both the language embedding and progress monitoring modules are more structurally simple and require less time to train.</p>
+<!-- <h4>What problems did you anticipate? What problems did you encounter? Did the very first thing you tried work?</h4>
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. -->
+
+<br>
+<h2>Implementation Details</h2>
+● Cross-entropy loss for the action selection and mean-squared loss for the progress monitor
+<br>
+● We  use  ADAM  as  the  optimizer.   The  learning  rate  is 1e−4 with  batch  size  of  64
+<br>
+● pre-trained ResNet-152 on ImageNet to extractimage features
+<br>
+● The embedded feature vector for each navigable direction is obtained by concatenating an appearance feature with a 4-d orientation feature [sinφ; cosφ; sinθ; cosθ], where φ and θ are the heading and elevation angle.
+<br>
+● We used precomputed image features from the <a href="https://niessner.github.io/Matterport/">Matterport dataset</a>, totaling 4.2 MB.
+<br>
+<br>
+<!-- Results -->
+<h2>Experimental Methodology</h2>
+<!--<h4>How did you measure success? What datasets did you use and what experiments did you carry out? What were the results, both quantitative and qualitative? Did you succeed? Did you fail? Why?</h4> -->
+<div style="text-align: center;">
+<img style="height: 200px;" alt="Default" src="img/default.png">
+<img style="height: 200px;" alt="GRU" src="img/gru.png">
+<img style="height: 200px;" alt="Conv" src="img/conv.png">
+</div><div style="text-align: center;">Figure 2: top left – default, top right – GRU, bottom – 2-convolutional-layer</div><br>
+
+<p>We first established a baseline by training and testing the model provided with the prior work using the hyperparameters that achieved the highest performance quoted in the paper. Each of the models were implemented using PyTorch and trained on the same machine with (TODO add machine specs, GPU details). We incrementally monitored the training process with Tensorboard.</p>
+<p>The following modifications were made to the prior work's model: (1) GRU cells were implemented in place of LSTM cells [2], and (2) two convolutional layers were added in front of the LSTM network with the intent of learning n-grams (bi-grams and tri-grams, respectively for each layer). The architectural changes are pictured above in Figure 2.</p>
+<p>Each modified architecture was trained and tested using the same hyperparameters that achieved the highest performance quoted in the paper to enable fair comparisons between the models. Our results are shown in the following section.</p>
+<br>
+
+<h2>Results</h2>
+<div style="text-align: center;"><h4>Architecture Modifications</h4></div>
+<div style="text-align: center;">
+<img style="height: 200px;" alt="" src="img/loss.png">
+<img style="height: 200px;" alt="" src="img/val-loss.png">
+<img style="height: 200px;" alt="" src="img/dist.png">
+<img style="height: 200px;" alt="" src="img/steps.png">
+<img style="height: 200px;" alt="" src="img/success-rate.png">
+<img style="height: 200px;" alt="" src="img/nav-error.png">
+</div>
+<div style="text-align: center;">Figure 3</div>
+
+<div style="display: flex; justify-content: center;">
+<img style="height: 50px;" align="middle" alt="" src="img/legend.png">
+</div>
+
+<div style="text-align: center;"><h4>Overall Performance</h4></div>
+<div style="text-align: center;">
+<img style="height: 300px;" alt="" src="img/table.png">
+</div>
+<div style="text-align: center;">Figure 4</div>
+<br>
+
+<div style="text-align: center;"><h4>Memory Usage</h4></div>
+<div style="text-align: center;">
+<img style="height: 300px;" alt="" src="img/memory.png">
+</div>
+<div style="text-align: center;">Figure 5</div>
+<br>
+
+<div style="text-align: center;"><h4>Instruction Length</h4></div>
+<div style="text-align: center;">
+<img style="height: 300px;" alt="" src="img/accuracy_instruction_default.png">
+<img style="height: 300px;" alt="" src="img/accuracy_instruction_gru.png">
+<img style="height: 300px;" alt="" src="img/accuracy_instruction_conv.png">
+</div>
+<div style="text-align: center;">Figure 6</div>
+<br>
+
+<h2>Analysis</h2>
+
+<p>We found that there was little improvement in the overall accuracy of the system, however efficiency (number of steps, training time) did improve. Replacing the LSTM with a GRU decreased the training time by 3.5 hours. This decrease was an 8.5% improvement over the default architecture. Adding 2 convolutional layers as input to the LSTM resulted in similar baseline performance.</p>
+
+<p>In order to provide deeper understanding of model performance, we conducted additional analysis comprised of measuring memory usage and determining accuracy as a function of textual instruction length. The results are shown in Figures 5 and 6 above. (TODO provide more details on how) Some of these results were unexpected, as we had predicted that higher instruction length would correspond to lower accuracy due to longer instructions being more complex. However, we instead found that there was no strong correlation between instruction length and model accuracy. It could instead be true that longer instructions are not necessarily more complex; rather, particular words and phrases in the vocabulary contribute more towards complexity. Furthermore, each of the models demonstrated significant overfitting, showing that the model was able to comprehensively learn over the given instruction vocabulary.</p>
+
+<p>The 2-convolutional-layer model had significantly higher memory usage than that of the default and GRU, which both had comparable memory usage, with the GRU beating the default model by 7.87 MB. This was expected, since convolutional layers are memory heavy.</p>
+<br>
+
+<h2>Future Work</h2>
+<p>We would like to guide our progress towards introducing POS (parts of speech) tagging and pre-trained vocabulary or text embeddings in order to see the effect on model performance. This would involve incorporating attended features for POS tags, where there is an assigned probability distribution for different tags. Furthermore, an interesting direction could involve experimenting with additional LSTM layers in the progress monitor and language embedding modules. We would also like to see the effect of implementing a different attentional mechanism, such as a multi-attentional neural network, for textual grounding to improve instruction tracking throughout time. </p>
+<p>Lastly, since we did not make any modifications to the visual grounding unit, future work could include more robust testing such as using different precomputed image features from other image/scene classification datasets such as STL-10 and COIL100. Using different image features may help reduce training times due to ResNet's extensive training cost.</p>
+<br>
+
+<h2>Team Members</h2>
+<table style="width:100%">
+  <tr>
+    <td>Osvaldo Armas</td>
+    <td>Description of Work</td>
+  </tr>
+  <tr>
+    <td>Daphne Chen</td>
+    <td>Description of Work</td>
+  </tr>
+  <tr>
+    <td>Charles Ramey</td>
+    <td>Description of Work</td>
+  </tr>
+</table>
+
+<br><br>
+
+<h2>Citations</h2>
+<p>[1] C. Ma et al. Self-Monitoring Navigation Agent via Auxiliary Progress Estimation, International Conference on Learning Representations, 2019.</p>
+<p>[2] K. Irie et al. LSTM, GRU, Highway and a Bit of Attention:An Empirical Overview for Language Modeling in Speech Recognition, Interspeech, 2016.</p>
+
+<br><br>
+
+  <hr>
+  <footer> 
+  <p>© Osvaldo Armas, Daphne Chen, Chad Ramey</p>
+  </footer>
+
+
+
+
+</div>
+</div>
+
+
+</body></html>
