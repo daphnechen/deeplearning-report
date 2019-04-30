@@ -45,7 +45,7 @@ color: #FF9900;
 
 <div style="text-align: center;">
 <img style="height: 200px;" alt="Default" src="img/matterport.png">
-</div> <div style="text-align: center;"><b>Figure 1:</b>Example visualized scenes from the dataset</div>
+</div> <div style="text-align: center;"><b>Figure 1: </b>Example visualized scenes from the dataset</div>
 
 <br>
 
@@ -96,7 +96,7 @@ Most other problems we experienced were related to the complexity of the code ba
 <img style="height: 200px;" alt="Default" src="img/default.png">
 <img style="height: 200px;" alt="GRU" src="img/gru.png">
 <img style="height: 200px;" alt="Conv" src="img/conv.png">
-</div><div style="text-align: center;">Figure 2: top left – default, top right – GRU, bottom – 2-convolutional-layer</div><br>
+</div><div style="text-align: center;"><b>Figure 2: </b>top left – default, top right – GRU, bottom – 2-convolutional-layer</div><br>
 
 <p>We first established a baseline by training and testing the model provided with the prior work using the hyperparameters that achieved the highest performance quoted in the paper. Each of the models were implemented using PyTorch and trained on the same machine with (TODO add machine specs, GPU details). We incrementally monitored the training process with Tensorboard. We achieved the same results from the baseline model in the paper.</p>
 <p>The following modifications were made to the prior work's model: (1) GRU cells were implemented in place of LSTM cells [2], and (2) two convolutional layers were added in front of the LSTM network with the intent of learning n-grams (bi-grams and tri-grams, respectively for each layer). The architectural changes are pictured above in Figure 2.</p>
@@ -113,7 +113,7 @@ Most other problems we experienced were related to the complexity of the code ba
 <img style="height: 200px;" alt="" src="img/success-rate.png">
 <img style="height: 200px;" alt="" src="img/nav-error.png">
 </div>
-<div style="text-align: center;">Figure 3</div>
+<div style="text-align: center;"><b>Figure 3</b></div>
 
 <div style="display: flex; justify-content: center;">
 <img style="height: 50px;" align="middle" alt="" src="img/legend.png">
@@ -123,14 +123,14 @@ Most other problems we experienced were related to the complexity of the code ba
 <div style="text-align: center;">
 <img style="height: 300px;" alt="" src="img/table.png">
 </div>
-<div style="text-align: center;">Figure 4</div>
+<div style="text-align: center;"><b>Figure 4: </b>A sampling of training results. While the default model demonstrated the best <i>overall</i> performance, the 2-layer Conv1d model was close behind for each of training loss, highest validation accuracy, and navigation error. The GRU model beat the default in total training time, as expected.</div>
 <br>
 
 <div style="text-align: center;"><h4>Memory Usage</h4></div>
 <div style="text-align: center;">
 <img style="height: 300px;" alt="" src="img/memory.png">
 </div>
-<div style="text-align: center;">Figure 5</div>
+<div style="text-align: center;"><b>Figure 5: </b>Measured memory usage in megabytes for each of the three model architectures.</div>
 <br>
 
 <div style="text-align: center;"><h4>Instruction Length</h4></div>
@@ -139,7 +139,7 @@ Most other problems we experienced were related to the complexity of the code ba
 <img style="height: 300px;" alt="" src="img/accuracy_instruction_gru.png">
 <img style="height: 300px;" alt="" src="img/accuracy_instruction_conv.png">
 </div>
-<div style="text-align: center;">Figure 6</div>
+<div style="text-align: center;"><b>Figure 6: </b></div>
 <br>
 
 <h2>Analysis</h2>
