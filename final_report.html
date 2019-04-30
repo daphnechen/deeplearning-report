@@ -71,6 +71,10 @@ color: #FF9900;
 <p>To include GRU cells in place of the the LSTM cells in the textual grounding module as well as the policy model changes were made to several of the python files included in the original project. First, the main python file was edited to include a command line parameter which is passable at runtime to enable selection of the GRU cells. Next, the forward pass methods were modified inside of the RNN python file to perform the network's forward pass through GRU cells instead of LSTM cells when the GRU parameter is passed at runtime. Finally, the encoder, panoramic agent, and policy agent python files were modified to use the GRU provided by the RNN file previously modified to include GRU cells.</p>
 <p>The motivation behind replacing the baseline model's LSTM cells with GRU cells revolved around the computational efficiency of GRU cells and the difference of the memory mechanism of GRU cells compared to LSTM cells. The original paper noted that different attentional mechanisms may improve model performance. It was our hope that the simpler memory mechanism of GRU cells might provide further information on how memory and attention affect the agent's overall navigational ability.
 </p>
+<p> The 2 Convolutional Layers were added by using (2,1) and (3,1) kernel. This means that the convolutional layers were convolving along 2 and 3 rows respectively. In other words, the convolutional layers were added to convolve along multiple words rather than to convolve along a single word. To maintain simplicity, only one output channel was used. Howevever, future experiments using multiple channels would likely result in more advanced performance. </p>
+<p> 
+The use of convolutional layers was inspired by n-grams models and how convolutional layers have been previously used to learn relationships among words. The idea was that any learned word relationships would improve attention as each encoding would include information about it's surrounding encodings. 
+</p>
 <p></p>
 <p>At the beginning of our project, when conferring with teaching assistants, we were warned about the computational resources that this project might require. The original work was trained and tested on a Titan Xp GPU. In comparison, our group had access to a workstation with a GeForce GTX 980 GPU and a laptop with a GeForce RTX 2070 Max-Q GPU. The logistics of training and testing models became our single largest challenge with this project. On average, it took around 2 days to train and test an experiment. Each time we conducted a comparison experiment with our three models, we required 6 days of training time. This time constraint limited the number of experiments we could conduct within the project time period.</p>
 <p>
@@ -91,7 +95,7 @@ Most other problems we experienced were related to the complexity of the code ba
 </div><div style="text-align: center;"><b>Figure 2: </b>top left – default, top right – GRU, bottom – 2-convolutional-layer</div><br>
 
 <p>We first established a baseline by training and testing the model provided with the prior work using the hyperparameters that achieved the highest performance quoted in the paper. Each of the models were implemented using PyTorch and trained on the same machine. We incrementally monitored the training process with Tensorboard. We achieved the same results from the baseline model in the paper.</p>
-<p>The following modifications were made to the prior work's model: (1) GRU cells were implemented in place of LSTM cells [2], and (2) two convolutional layers were added in front of the LSTM network with the intent of learning n-grams (bi-grams and tri-grams, respectively for each layer). The architectural changes are pictured above in Figure 2.</p>
+<p>The following modifications were made to the prior work's model: (1) GRU cells were implemented in place of LSTM cells [5], and (2) two convolutional layers were added in front of the LSTM network with the intent of learning n-grams (bi-grams and tri-grams, respectively for each layer). The architectural changes are pictured above in Figure 2.</p>
 <p>Each modified architecture was trained and tested using the same hyperparameters that achieved the highest performance quoted in the paper to enable fair comparisons between the models. Our metrics for success included the final training loss, highest validation accuracy, navigation error, the agent's distance from goal, total training time, and memory usage. The final results are shown in the following section.</p>
 <br>
 
@@ -129,9 +133,9 @@ Most other problems we experienced were related to the complexity of the code ba
 <div style="text-align: center;">
 <img style="height: 300px;" alt="" src="img/accuracy_instruction_default.png">
 <img style="height: 300px;" alt="" src="img/accuracy_instruction_gru.png">
-<img style="height: 300px;" alt="" src="img/accuracy_instruction_conv.png">
+<img style="height: 300px;" altWhat were the results, both quantitative and qualitative="" src="img/accuracy_instruction_conv.png">
 </div>
-<div style="text-align: center;"><b>Figure 6: </b>Instruction length vs. accuracy for each of the three model architectures.</div>
+<div style="text-align: center;What were the results, both quantitative and qualitative"><b>Figure 6: </b>Instruction length vs. accuracy for each of the three model architectures.</div>
 <br>
 
 <h2>Analysis</h2>
@@ -149,7 +153,6 @@ Most other problems we experienced were related to the complexity of the code ba
 <p>In addition, since we did not make any modifications to the visual grounding unit, future work could include more robust testing such as using different precomputed image features from other image/scene classification datasets such as STL-10 and COIL100. Using different image features may help reduce training times due to ResNet's extensive training cost.</p>
 <p>Lastly, since the three of us are all roboticists in practice, we would love to see this work deployed on a real mobile robot. It would be interesting to see whether the added stochasticity in the real world will significantly affect performance. Robots themselves are often unpredictable and difficult to work with, so testing on one would further reinforce the robustness of this study.</p>
 <br>
-
 <h2>Team Member Task Breakdown</h2>
 <table class="table" style="width:100%">
   <thead>
@@ -161,7 +164,7 @@ Most other problems we experienced were related to the complexity of the code ba
   <tbody>
     <tr>
       <td>Osvaldo Armas</td>
-      <td>Co-wrote proposal. Set up development environment on the GeForce RTX 2070 Max-Q laptop. Co-wrote poster. Co-wrote final paper.</td>
+      <td>Co-wrote proposal. Set up development environment on the GeForce RTX 2070 Max-Q laptop. Co-wrote poster. Co-wrote final paper. Wrote implementation using convolutional layers. </td>
     </tr>
     <tr>
       <td>Daphne Chen</td>
@@ -177,10 +180,12 @@ Most other problems we experienced were related to the complexity of the code ba
 
 <h2>Citations</h2>
 <p>[1] C. Ma et al. Self-Monitoring Navigation Agent via Auxiliary Progress Estimation, International Conference on Learning Representations, 2019.</p>
-<p>[2] K. Irie et al. LSTM, GRU, Highway and a Bit of Attention:An Empirical Overview for Language Modeling in Speech Recognition, Interspeech, 2016.</p>
-<p>[3] C. Ma et al. The Regretful Agent: Heuristic-Aided Navigation through Progress Estimation, IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2019.</p>
-<p>[4] Y. Kim. Convolutional Neural Networks for Sentence Classification. Available: https://arxiv.org/abs/1408.5882 </p>
+<p>[2] K. Irie et al. LSTM, GRU, Highway and a Bit of Attention: An Empirical Overview for Language Modeling in Speech Recognition, Interspeech, 2016.</p>
+<p>[3] Y. Kim. Convolutional Neural Networks for Sentence Classification. Available: https://arxiv.org/abs/1408.5882 </p>
+<p>[4] C. Ma et al. The Regretful Agent: Heuristic-Aided Navigation through Progress Estimation, IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2019.</p>
 <p>[5] J. Chung. Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling, NIPS Deep Learning and Representation Learning Workshop, 2014.</p>
+
+
 
 <br><br>
 
