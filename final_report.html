@@ -40,13 +40,9 @@ color: #FF9900;
 <h2>Abstract</h2>
 <p>Our group replicated and extended the results of the study in the paper: <i>Self-Monitoring Navigation Agent via Auxiliary Progress Estimation</i> (<a href="https://arxiv.org/pdf/1901.03035.pdf">arxiv</a>).
 <p>Enabling an autonomous agent to navigate in unknown environments is a known challenge, and many studies have been done on navigation via visual data. This study addresses the problem of an agent dealing with tasks that lack an explicit representation of the goal – for example, determining what an agent should do when it lacks an intermediate action that is a necessary prior for an ongoing task.</p>
-<p>The current approach outlined in the paper involves a self-monitoring agent that consists of three modules: visual-textual grounding, progress monitoring, and action selection. Our project will aim to complete two main goals: replicate the original study performance using PyTorch, and improve upon the study performance by experimenting with alternative network architectures.
-It is challenging to enable an autonomous agent to navigate through uncertainty.
+<p>The current approach outlined in the paper involves a self-monitoring agent that consists of three modules: visual-textual grounding, progress monitoring, and action selection.</p>
+<p>Our work validated the results of the original paper and evaluated two alternative network architectures which were able to reduce training time and augment the original model's textual grounding functionality.</p>
 <br>
-<br>
-***Stuff from poster***
-<br>
-The field of deep learning is advancing rapidly; we want to contribute towards prior work by improving baseline accuracy.</p>
 
 <!-- figure -->
 
@@ -57,14 +53,15 @@ The field of deep learning is advancing rapidly; we want to contribute towards p
 <br>
 
 <h2>Introduction</h2>
-<p>Our project aims to validate the results from the existing literature and improve these results by studying the performance differences of different network architectures. Once we achieved the baseline performance, we considered ways in which we could either improve the model efficiency or boost validation accuracy (model success rate). Given these motivations, we decided upon using a gated recurrent unit (GRU) in place of an LSTM because a GRU has no explicit memory and is thus more efficient. Convolutional layers (TODO add information). We expect that each of these modifications will yield different performance than the default LSTM.</p>
-<p>The prior work utilizes Long Short Term Memory cells in the attention model for instruction parsing as well as in the visual and textual feature co-grounding model. This project seeks to examine the performance tradeoffs and advantages of instead using GRU cells and convolutional layers in place of the LSTM cells.</p>
+<p>Our project aimed to validate the results from the existing literature and improve these results by studying the performance differences of different network architectures. Once we achieved the baseline performance, we considered ways in which we could either improve the model efficiency or boost validation accuracy (model success rate). Given these motivations, we decided upon using a gated recurrent unit (GRU) in place of an Long Short Term Memory (LSTM) because a GRU has no explicit memory and is thus more efficient. Convolutional layers (TODO add information). We expected that each of these modifications will yield different performance than the default LSTM.</p>
+<p>The prior work utilized LSTM cells in the attention model for instruction parsing as well as in the visual and textual feature co-grounding model. This project sought to examine the performance tradeoffs and advantages of instead using GRU cells and convolutional layers in place of the LSTM cells.</p>
 <p>If our project is successful, we will be able to explain the impacts of different network architectures on applied tasks such as self-monitoring navigation. The GRU and convolutional layers, when compared to LSTM cells, will be expected to impact not only performance but also training and testing time. Our results will show how these alternative architectures can be leveraged to improve and extend the prior work. </p>
 <br>
 
-<h3>Prior Work</h3>
-The original paper designs and implements an agent that can learn to navigate in photo-realistic environments given image data (RGB-D photos of rooms). It is comprised of textual grounding, action selection, progress monitoring, and visual grounding. The visual grounding unit uses ResNet-152 to extract image features, which limits our ability to change that component's architecture. We decided to treat this as a black box and instead focus on improving performance in the action selection and textual grounding units.
-<br><br>
+<h3>Related Work</h3>
+<p>The original paper designs and implements an agent that can learn to navigate in photo-realistic environments given image data (RGB-D photos of rooms).</p>
+<p>The follow up work from the same authors of the original paper further examines the use of the original model's progress monitor module as a heuristic for evaluating actions when an agent is searching for the best possible next action.</p>
+<br>
 
 <!-- Approach -->
 <h2>Approach</h2>
@@ -73,8 +70,10 @@ The original paper designs and implements an agent that can learn to navigate in
 These experiments are adaptations and extensions of the baseline to improve overall performance accuracy and speed up the training process.
 The convolutional layers added in front of the LSTM network in the language embedding module assist in learning bigrams or trigrams based on the kernel size. This extension should improve the system’s contextual understanding of instruction words.
 With fewer gates and no memory unit, the GRU cells which replaced the LSTM cells in both the language embedding and progress monitoring modules are more structurally simple and require less time to train.</p>
-<!-- <h4>What problems did you anticipate? What problems did you encounter? Did the very first thing you tried work?</h4>
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. -->
+<p>At the beginning of our project, when conferring with teaching assistants, we were warned about the computational resources that this project might require. The original work was trained and tested on a Titan Xp GPU. In comparison, our group had access to a workstation with a GeForce GTX 980 GPU and a laptop with a GeForce RTX 2070 Max-Q GPU. The logistics of training and testing models became our single largest challenge with this project. On average, it took around 2 days to train and test an experiment. Each time we conducted a comparison experiment with our three models, we required 6 days of training time. This time constraint limited the number of experiments we could conduct within the project time period.</p>
+<p>
+Most other problems we experienced were related to the complexity of the code base from the original study. The project is a cutting edge system for robotic navigation utilizing multiple collaborative machine learning pipelines. Naturally such a system involves a large amount of data pre-processing  software, software for the machine learning modules, and software for training and testing the machine learning modules. Each modification of the system required a large amount of research and testing to properly locate where modifications needed to be made and how to integrate the modifications to operate seamlessly with the rest of the system. These challenges were most apparent when modifying the network architecture in the textual co-grounding module and collecting custom metrics from the evaluation code. 
+</p>
 
 <br>
 <h2>Implementation Details</h2>
@@ -152,8 +151,9 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
 <br>
 
 <h2>Future Work</h2>
-<p>We would like to guide our progress towards introducing POS (parts of speech) tagging and pre-trained vocabulary or text embeddings in order to see the effect on model performance. This would involve incorporating attended features for POS tags, where there is an assigned probability distribution for different tags. Furthermore, an interesting direction could involve experimenting with additional LSTM layers in the progress monitor and language embedding modules. We would also like to see the effect of implementing a different attentional mechanism, such as a multi-attentional neural network, for textual grounding to improve instruction tracking throughout time. </p>
-<p>Lastly, since we did not make any modifications to the visual grounding unit, future work could include more robust testing such as using different precomputed image features from other image/scene classification datasets such as STL-10 and COIL100. Using different image features may help reduce training times due to ResNet's extensive training cost.</p>
+<p>
+We would like to guide our progress towards introducing POS (parts of speech) tagging and pre-trained vocabulary or text embeddings in order to see the effect on model performance. This would involve incorporating attended features for POS tags, where there is an assigned probability distribution for different tags. Furthermore, an interesting direction could involve experimenting with additional LSTM layers in the progress monitor and language embedding modules. We would also like to see the effect of implementing a different attentional mechanism, such as a multi-attentional neural network, for textual grounding to improve instruction tracking throughout time.
+</p>
 <br>
 
 <h2>Team Members</h2>
@@ -177,7 +177,7 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
 <h2>Citations</h2>
 <p>[1] C. Ma et al. Self-Monitoring Navigation Agent via Auxiliary Progress Estimation, International Conference on Learning Representations, 2019.</p>
 <p>[2] K. Irie et al. LSTM, GRU, Highway and a Bit of Attention:An Empirical Overview for Language Modeling in Speech Recognition, Interspeech, 2016.</p>
-
+<p>[3] C. Ma et al. The Regretful Agent: Heuristic-Aided Navigation through Progress Estimation, IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2019.</p>
 <br><br>
 
   <hr>
