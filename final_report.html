@@ -79,8 +79,7 @@ Most other problems we experienced were related to the complexity of the code ba
 
 <br>
 <h2>Implementation Details</h2>
-● We used precomputed image features from the <a href="https://niessner.github.io/Matterport/">Matterport dataset</a>, totaling 4.2 MB.
-<br>
+<p>We used precomputed image features from the <a href="https://niessner.github.io/Matterport/">Matterport dataset</a>, totaling 4.2 GB. Image features were precomputed via ResNet-152 from the ImageNet and Places365 datasets in order to drastically reduce training time. ADAM is used as the optimizer; we chose to stick with this because it is more efficient than stochastic gradient descent (SGD) with low-parameter models such as ours and is specifically designed for training deep networks. In general, ADAM works as a combination between RMSprop and SGD using momentum. The learning rate is 1e−4 with batch size of 64, which we kept low in order to balance the tradeoff of having a high number of iterations (200 iterations over 300 epochs for training) in order to improve model generalization.</p>
 <br>
 <!-- Results -->
 <h2>Experimental Methodology</h2>
@@ -146,6 +145,7 @@ Most other problems we experienced were related to the complexity of the code ba
 
 <h2>Future Work</h2>
 <p>We would like to guide our progress towards introducing POS (parts of speech) tagging and pre-trained vocabulary or text embeddings in order to see the effect on model performance. This would involve incorporating attended features for POS tags, where there is an assigned probability distribution for different tags. Furthermore, an interesting direction could involve experimenting with additional LSTM layers in the progress monitor and language embedding modules. We would also like to see the effect of implementing a different attentional mechanism, such as a multi-attentional neural network, for textual grounding to improve instruction tracking throughout time.</p>
+<p>Generally speaking, we could further extend this study by performing hyperparameter tuning on the default model, but we avoided it for the sake of this project because we judged it to not be a sufficient engineering problem. One consideration is to increase batch size above the constant 64 that we used for each of our experiments, since a higher batch size may improve generalization ability for such a large dataset.</p>
 <p>In addition, since we did not make any modifications to the visual grounding unit, future work could include more robust testing such as using different precomputed image features from other image/scene classification datasets such as STL-10 and COIL100. Using different image features may help reduce training times due to ResNet's extensive training cost.</p>
 <p>Lastly, since the three of us are all roboticists in practice, we would love to see this work deployed on a real mobile robot. It would be interesting to see whether the added stochasticity in the real world will significantly affect performance. Robots themselves are often unpredictable and difficult to work with, so testing on one would further reinforce the robustness of this study.</p>
 <br>
