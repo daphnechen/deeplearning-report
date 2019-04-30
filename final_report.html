@@ -50,7 +50,7 @@ color: #FF9900;
 <br>
 
 <h2>Introduction</h2>
-<p>Our project aimed to validate the results from the existing literature and improve these results by studying the performance differences of different network architectures. Once we achieved the baseline performance, we considered ways in which we could either improve the model efficiency or boost validation accuracy (model success rate). Given these motivations, we decided upon using a gated recurrent unit (GRU) in place of an Long Short Term Memory (LSTM) because a GRU has no explicit memory and is thus more efficient. Convolutional layers (TODO add information). We expected that each of these modifications will yield different performance than the default LSTM.</p>
+<p>Our project aimed to validate the results from the existing literature and improve these results by studying the performance differences of different network architectures. Once we achieved the baseline performance, we considered ways in which we could either improve the model efficiency or boost validation accuracy (model success rate). Given these motivations, we decided upon using a gated recurrent unit (GRU) in place of an Long Short Term Memory (LSTM) because a GRU has no explicit memory and is thus more efficient. Convolutional layers have formerly been used for sentence classification [4] in order to learn relationships among words, similar to n-grams; thus potentially boosting performance. We expected that each of these modifications will yield different performance than the default LSTM.</p>
 <p>The prior work utilized LSTM cells in the attention model for instruction parsing as well as in the visual and textual feature co-grounding model. This project sought to examine the performance tradeoffs and advantages of instead using GRU cells and convolutional layers in place of the LSTM cells.</p>
 <p>If our project is successful, we will be able to explain the impacts of different network architectures on applied tasks such as self-monitoring navigation. The GRU and convolutional layers, when compared to LSTM cells, will be expected to impact not only performance but also training and testing time. Our results will show how these alternative architectures can be leveraged to improve and extend the prior work. </p>
 <br>
@@ -179,6 +179,8 @@ Most other problems we experienced were related to the complexity of the code ba
 <p>[1] C. Ma et al. Self-Monitoring Navigation Agent via Auxiliary Progress Estimation, International Conference on Learning Representations, 2019.</p>
 <p>[2] K. Irie et al. LSTM, GRU, Highway and a Bit of Attention:An Empirical Overview for Language Modeling in Speech Recognition, Interspeech, 2016.</p>
 <p>[3] C. Ma et al. The Regretful Agent: Heuristic-Aided Navigation through Progress Estimation, IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2019.</p>
+<p>[4] Y. Kim. Convolutional Neural Networks for Sentence Classification. Available: https://arxiv.org/abs/1408.5882 </p>
+
 <br><br>
 
   <hr>
