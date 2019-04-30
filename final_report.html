@@ -79,14 +79,6 @@ Most other problems we experienced were related to the complexity of the code ba
 
 <br>
 <h2>Implementation Details</h2>
-● Cross-entropy loss for the action selection and mean-squared loss for the progress monitor
-<br>
-● We  use  ADAM  as  the  optimizer.   The  learning  rate  is 1e−4 with  batch  size  of  64
-<br>
-● pre-trained ResNet-152 on ImageNet to extractimage features
-<br>
-● The embedded feature vector for each navigable direction is obtained by concatenating an appearance feature with a 4-d orientation feature [sinφ; cosφ; sinθ; cosθ], where φ and θ are the heading and elevation angle.
-<br>
 ● We used precomputed image features from the <a href="https://niessner.github.io/Matterport/">Matterport dataset</a>, totaling 4.2 MB.
 <br>
 <br>
